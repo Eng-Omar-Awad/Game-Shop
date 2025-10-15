@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>متجر مونلونا 🌌 — خدمات التفريم</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Play CDN + custom colors -->
+    <script>
+      tailwind = { config: { theme: { extend: { colors: { "midnight": "#0A0E1A", "skyblue": "#3BA4F9", "golden": "#E5C07B", "offwhite": "#F5F7FA", "slate": "#9AA0A6" }, fontFamily: { heading: ['\'Cinzel Decorative\'', 'serif'], body: ['\'Poppins\'', 'system-ui'] } } } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      :root { color-scheme: dark; }
+      body { background: linear-gradient(180deg,#071026 0%, #0A0E1A 60%); }
+      .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(6px); }
+
+      /* small utility for text glow used in hero headings */
+      .text-glow { text-shadow: 0 0 10px rgba(59,164,249,0.12); }
+
+      /* ripple helper (fallback animation) */
+      .ripple { position: absolute; border-radius: 9999px; transform: scale(0); animation: ripple 600ms linear; background: rgba(255,255,255,0.18); pointer-events: none; }
+      @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+      /* ensure anchor/button overflow-hidden for ripple */
+      .clip { overflow: hidden; position: relative; }
+
+      
+  /* existing styles ... */
+
+  /* Navbar link glow */
+  .nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #3BA4F9, #7BDCFD);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .nav-link:hover {
+    color: #3BA4F9;
+    text-shadow: 0 0 8px rgba(59, 164, 249, 0.6);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Call-to-action glow (اطلب الآن) */
+  .nav-btn {
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(59, 164, 249, 0.3);
+  }
+
+  .nav-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 20px rgba(59, 164, 249, 0.6);
+  }
+
+
+  /* Footer link glow */
+footer a {
+  color: #9AA0A6;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+footer a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: 0;
+  width: 0%;
+  height: 1.5px;
+  background: linear-gradient(90deg, #3BA4F9, #7BDCFD);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+footer a:hover {
+  color: #3BA4F9;
+  text-shadow: 0 0 6px rgba(59, 164, 249, 0.6);
+}
+
+footer a:hover::after {
+  width: 100%;
+}
+
+
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(30, 60, 120, 0.6);
+    border-color: rgba(30, 60, 120, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(30, 60, 120, 0.8);
+    border-color: rgba(59, 130, 246, 0.9);
+  }
+}
+.animate-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+
+
+/* Deep navy soft glow animation */
+@keyframes softNavyGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(10, 20, 60, 0.6), 0 0 20px rgba(10, 20, 60, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(10, 30, 80, 0.75), 0 0 30px rgba(10, 30, 80, 0.5);
+  }
+}
+.glow-navy {
+  animation: softNavyGlow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+/* Hover intensifies the glow slightly */
+.glow-navy:hover {
+  box-shadow: 0 0 25px rgba(20, 40, 100, 0.8), 0 0 45px rgba(20, 40, 100, 0.6);
+  transform: scale(1.05);
+}
+
+/* ===== Magical shifting navy → sky blue glow ===== */
+@keyframes softMysticGlow {
+  0% {
+    box-shadow:
+      0 0 12px rgba(10, 20, 60, 0.7),
+      0 0 24px rgba(10, 20, 60, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(59, 164, 249, 0.8),
+      0 0 36px rgba(59, 164, 249, 0.6);
+  }
+  100% {
+    box-shadow:
+      0 0 12px rgba(10, 20, 60, 0.7),
+      0 0 24px rgba(10, 20, 60, 0.5);
+  }
+}
+
+.glow-navy {
+  animation: softMysticGlow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/* Hover state — stronger, more radiant */
+.glow-navy:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 20px rgba(59, 164, 249, 0.9),
+    0 0 45px rgba(10, 20, 60, 0.8);
+}
+
+
+/* === Soft reflection glow beneath glowing buttons === */
+.glow-navy {
+  position: relative;
+}
+
+.glow-navy::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 8px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 164, 249, 0.35) 0%,
+    rgba(10, 20, 60, 0.0) 80%
+  );
+  filter: blur(6px);
+  opacity: 0.8;
+  pointer-events: none;
+  animation: glowReflect 3s ease-in-out infinite;
+}
+
+@keyframes glowReflect {
+  0%, 100% {
+    opacity: 0.6;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(10, 20, 60, 0.4) 0%,
+      rgba(10, 20, 60, 0.0) 80%
+    );
+  }
+  50% {
+    opacity: 1;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(59, 164, 249, 0.45) 0%,
+      rgba(59, 164, 249, 0.0) 80%
+    );
+  }
+}
+
+
+    </style>
+  </head>
+
+  <body class="antialiased text-offwhite font-body">
+
+    <!-- NAV -->
+    <header class="container mx-auto px-6 py-6 flex items-center justify-between transition-all duration-500" id="mainNav">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl overflow-hidden shadow-lg border border-skyblue/30">
+  <img src="./images/G-Lauma.jpeg" alt="Logo" class="w-full h-full object-cover" />
+</div>
+
+        <div>
+          <h1 class="text-xl font-heading">متجر مونلونا 🌌</h1>
+          <p class="text-xs text-slate">خدمات تفريم يدوية وآمنة</p>
+        </div>
+      </div>
+<nav class="hidden md:flex gap-6 items-center">
+  <a href="#services" class="nav-link text-sm opacity-90">الخدمات</a>
+  <a href="#how" class="nav-link text-sm opacity-90">طريقة العمل</a>
+  <a href="#contact" class="nav-link text-sm opacity-90">تواصل</a>
+<a href="#" class="nav-btn px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold shadow-md glow-navy">
+  اطلب الآن
+</a>
+</nav>
+
+    </header>
+
+    <!-- HERO -->
+    <section class="relative fade-up" id="hero">
+      <div class="relative overflow-hidden">
+        <!-- background artwork -->
+        <div class="absolute inset-0">
+          <img src="./images/Luna.jpg" alt="fantasy landscape" class="w-full h-[68vh] object-cover opacity-60"/>
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-midnight"></div>
+        </div>
+
+        <div class="relative container mx-auto px-6 py-28 flex flex-col md:flex-row items-center gap-8">
+          <div class="w-full md:w-7/12 text-right">
+            <h2 class="text-4xl md:text-5xl font-heading leading-tight text-glow">خدمة تفريم احترافية لعالم Teyvat</h2>
+            <p class="mt-4 text-slate max-w-xl">نقوم بجمع المواد، الفوز بالدومينات، رفع مستوى الشخصيات وكل ما تحتاجه بدون استخدام أدوات غير قانونية — شغل يدوي وآمن.</p>
+
+            <div class="mt-6 flex gap-4 justify-end">
+<a href="#contact" class="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-skyblue to-indigo-500 text-midnight font-semibold shadow-lg transition-transform hover:scale-105 hover:brightness-110 clip glow-navy">
+  اطلب الآن
+</a>
+              <a href="#services" class="inline-block px-5 py-3 rounded-xl border border-slate text-sm transition-transform hover:scale-105 clip">اعرف المزيد</a>
+            </div>
+
+            <div class="mt-6 flex gap-4 justify-end items-center text-xs text-slate">
+              <div class="flex items-center gap-2">
+                <span class="bg-gray-800/40 px-3 py-1 rounded-full">⏱ تسليم سريع</span>
+                <span class="bg-gray-800/40 px-3 py-1 rounded-full">🔒 آمن وسري</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- visual card -->
+          <div class="hidden md:block md:w-5/12 fade-up">
+            <div class="glass rounded-3xl p-4 shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-skyblue/20 clip">
+              <img src="./images/Lauma.jpg" alt="Lauma card" class="rounded-2xl w-full h-64 object-cover"/>
+              <div class="p-4 pt-6 text-right">
+                <h3 class="font-heading text-lg">Customized Account Farming</h3>
+                <p class="text-slate text-sm mt-2">Artifacts, Mora, Boss materials, Map farming — كل شيء يدوي وبمصداقية.</p>
+                <div class="mt-4 flex justify-end">
+             <a href="#contact" class="text-sm px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold transition-transform hover:scale-105 hover:brightness-110 clip glow-navy">
+  اطلب الآن
+</a>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+<!-- SERVICES -->
+<section id="services" class="container mx-auto px-6 py-20">
+  <h3 class="text-3xl font-heading text-right mb-10">خدماتنا</h3>
+
+  <!-- Top row (3 cards) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center items-stretch">
+    
+    <!-- Card 1 -->
+    <div class="glass p-6 rounded-2xl shadow-md text-right transition-transform duration-300 
+    hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.25)] flex flex-col justify-between">
+      <div>
+        <h4 class="font-semibold text-lg">Farming</h4>
+        <p class="text-slate text-sm mt-2">
+          مورا وكتب --> 5 ريال لليوم الواحد.<br>
+          برايمو --> عشر سحبات 20 ريال.
+        </p>
+      </div>
+      <div class="mt-4 flex justify-between items-center">
+        <p class="text-golden font-bold">5 / 20 ريال</p>
+        <a href="#contact"
+          class="text-sm px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold transition-transform 
+          hover:scale-105 hover:brightness-110 glow-navy">اطلب الآن</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="glass p-6 rounded-2xl shadow-md text-right transition-transform duration-300 
+    hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.25)] flex flex-col justify-between">
+      <div>
+        <h4 class="font-semibold text-lg">Exploring + World Quests</h4>
+        <p class="text-slate text-sm mt-2">المنطقه الواحده --> 40 ريال.</p>
+      </div>
+      <div class="mt-4 flex justify-between items-center">
+        <p class="text-golden font-bold">40 ريال</p>
+        <a href="#contact"
+          class="text-sm px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold transition-transform 
+          hover:scale-105 hover:brightness-110 glow-navy">اطلب الآن</a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="glass p-6 rounded-2xl shadow-md text-right transition-transform duration-300 
+    hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.25)] flex flex-col justify-between">
+      <div>
+        <h4 class="font-semibold text-lg">Exploration</h4>
+        <p class="text-slate text-sm mt-2">
+          الاكسبلور لحاله ب 20 للمنطقة الواحده.<br>
+          مهمة الاستكشاف ب 20.
+        </p>
+      </div>
+      <div class="mt-4 flex justify-between items-center">
+        <p class="text-golden font-bold">20 ريال</p>
+        <a href="#contact"
+          class="text-sm px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold transition-transform 
+          hover:scale-105 hover:brightness-110 glow-navy">اطلب الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom row (4th + 5th cards) -->
+  <div class="flex flex-col sm:flex-row justify-center items-stretch gap-8 mt-10">
+
+    <!-- Card 4 -->
+    <div class="glass p-6 rounded-2xl shadow-md text-right transition-transform duration-300 
+    hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.25)] flex flex-col justify-between w-full sm:w-1/2 lg:w-1/3">
+      <div>
+        <h4 class="font-semibold text-lg">Characters Development</h4>
+        <p class="text-slate text-sm mt-2">تطوير الشخصية بشكل كامل.</p>
+      </div>
+      <div class="mt-4 flex justify-between items-center">
+        <p class="text-golden font-bold">15 ريال</p>
+        <a href="#contact"
+          class="text-sm px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold transition-transform 
+          hover:scale-105 hover:brightness-110 glow-navy">اطلب الآن</a>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="glass p-6 rounded-2xl shadow-md text-right transition-transform duration-300 
+    hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.25)] flex flex-col justify-between w-full sm:w-1/2 lg:w-1/3">
+      <div>
+        <h4 class="font-semibold text-lg">Quests</h4>
+        <p class="text-slate text-sm mt-2">
+          المهمات العاديه غير الاستكشافية --> 10 ريال.
+          <br>
+ ألاركون كویست --> 30 ریال. 
+        </p>
+      </div>
+      <div class="mt-4 flex justify-between items-center">
+        <p class="text-golden font-bold">10 / 30 ريال</p>
+        <a href="#contact"
+          class="text-sm px-4 py-2 rounded-lg bg-skyblue text-midnight font-semibold transition-transform 
+          hover:scale-105 hover:brightness-110 glow-navy">اطلب الآن</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="container mx-auto px-6 py-12 fade-up">
+      <h3 class="text-2xl font-heading text-right mb-6">كيف نعمل</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass p-6 rounded-xl text-right transition-transform duration-300 hover:scale-105 fade-up clip">
+          <div class="text-xl font-semibold">1. اختر الخدمة</div>
+          <p class="text-slate mt-2 text-sm">حدد اللي محتاجه من الكروت فوق.</p>
+        </div>
+        <div class="glass p-6 rounded-xl text-right transition-transform duration-300 hover:scale-105 fade-up clip">
+          <div class="text-xl font-semibold">2. تواصل معنا</div>
+          <p class="text-slate mt-2 text-sm">نستخدم  Instagram لتنسيق بيانات الحساب بأمان.</p>
+        </div>
+        <div class="glass p-6 rounded-xl text-right transition-transform duration-300 hover:scale-105 fade-up clip">
+          <div class="text-xl font-semibold">3. استلم خدمتك</div>
+          <p class="text-slate mt-2 text-sm">نسلمك تقريرًا وبعد استلامك نضمن رضاك.</p>
+        </div>
+      </div>
+    </section>
+
+<!-- GALLERY / IMAGES -->
+<section class="container mx-auto px-6 py-16 fade-up" id="gallery">
+  <h3 class="text-2xl font-heading text-right mb-8">نماذج أعمال</h3>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+    <div class="gallery-card relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.4)] cursor-pointer clip">
+      <img src="./images/D-1.jpg" alt="sample 1" class="w-80 h-56 object-cover rounded-2xl" />
+    </div>
+    <div class="gallery-card relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.4)] cursor-pointer clip">
+      <img src="./images/D-2.jpg" alt="sample 2" class="w-80 h-56 object-cover rounded-2xl" />
+    </div>
+    <div class="gallery-card relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,164,249,0.4)] cursor-pointer clip">
+      <img src="./images/D-3.jpg" alt="sample 3" class="w-80 h-56 object-cover rounded-2xl" />
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="imageModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 backdrop-blur-sm">
+    <button id="prevBtn" class="absolute left-8 text-white/70 hover:text-white text-4xl select-none">&#10094;</button>
+    <img id="modalImg" src="" alt="Expanded preview" class="max-w-[90%] max-h-[80vh] rounded-2xl shadow-[0_0_25px_rgba(30,60,120,0.6)] border-2 border-[#1E3A8A]/70 animate-glow transition-all duration-500" />
+    <button id="nextBtn" class="absolute right-8 text-white/70 hover:text-white text-4xl select-none">&#10095;</button>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section id="contact" class="container mx-auto px-6 py-12 fade-up">
+  <div class="glass rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="text-right">
+      <h3 class="text-2xl font-heading">جاهز تبدأ؟</h3>
+      <p class="text-slate mt-2">
+        تواصل على  Instagram واكتب طلبك — هنتفق على تفاصيل التسليم والأمان.
+      </p>
+    </div>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/m00nlunna?igsh=MXVjdzV4b25tc3ByMg%3D%3D&utm_source=qr" 
+         class="relative overflow-hidden flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] text-white font-semibold transition-all hover:shadow-[0_0_20px_#FD1D1D] hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+          <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/>
+        </svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+
+    <!-- FOOTER -->
+<footer class="mt-12 py-8 border-t border-gray-800 text-center relative z-10">
+      <div class="container mx-auto px-6 text-slate text-sm">
+        <div class="mb-2">© <span id="year"></span> متجر مونلونا 🌌</div>
+        <div>Designed & Built by <a href="http://t.me/FallX_30" class="underline">Omar (@FallX_30)</a></div>
+      </div>
+    </footer>
+
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+    <!-- Interactivity Script: fade-up on scroll, navbar blur, ripple on click -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Intersection Observer for fade-up
+        const observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("opacity-100", "translate-y-0");
+                entry.target.classList.remove("opacity-0");
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+          el.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-700', 'ease-out');
+          observer.observe(el);
+        });
+
+        // Navbar background change on scroll
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 60) {
+            nav.classList.add('bg-midnight/80','backdrop-blur-sm','shadow-lg');
+          } else {
+            nav.classList.remove('bg-midnight/80','backdrop-blur-sm','shadow-lg');
+          }
+        });
+
+        // Ripple effect for clickable elements (anchors / buttons)
+        function createRipple(e) {
+          const el = e.currentTarget;
+          const rect = el.getBoundingClientRect();
+          const circle = document.createElement('span');
+          const diameter = Math.max(rect.width, rect.height);
+          circle.style.width = circle.style.height = `${diameter}px`;
+          circle.style.left = `${e.clientX - rect.left - diameter / 2}px`;
+          circle.style.top = `${e.clientY - rect.top - diameter / 2}px`;
+          circle.className = 'ripple';
+          el.appendChild(circle);
+          setTimeout(() => circle.remove(), 650);
+        }
+
+        document.querySelectorAll('a.clip, button.clip, .clip').forEach(el => {
+          el.addEventListener('click', function(e) {
+            createRipple(e);
+          });
+        });
+
+        // Optional: quick click demo for order buttons (opens modal later if needed)
+        document.querySelectorAll('a[href="#contact"], a:contains("اطلب")').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            // allow normal anchor if user intended navigation
+            // we can later replace this to open modal
+          });
+        });
+      });
+    </script>
+
+
+<script>
+  // Gallery click-to-expand logic
+  document.querySelectorAll(".gallery-card img").forEach(img => {
+    img.addEventListener("click", () => {
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+      modalImg.src = img.src;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    });
+  });
+
+  // Close modal on click
+  document.getElementById("imageModal").addEventListener("click", (e) => {
+    if (e.target.id === "imageModal") {
+      e.currentTarget.classList.add("hidden");
+      e.currentTarget.classList.remove("flex");
+    }
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryImages = Array.from(document.querySelectorAll(".gallery-card img"));
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      modalImg.src = galleryImages[currentIndex].src;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+
+    galleryImages.forEach((img, index) => {
+      img.addEventListener("click", () => openModal(index));
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (modal.classList.contains("flex")) {
+        if (e.key === "ArrowRight") showNext();
+        if (e.key === "ArrowLeft") showPrev();
+        if (e.key === "Escape") closeModal();
+      }
+    });
+  });
+</script>
+
+  </body>
+</html>
