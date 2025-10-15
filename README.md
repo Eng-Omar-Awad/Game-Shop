@@ -2,10 +2,12 @@
 
 # 🌌 Monlona Genshin Farm — Website Project
 
+
 A sleek and interactive landing page for **Monluna**, a custom Genshin Impact farming service.  
 Built with **HTML**, **Tailwind CSS**, and a bit of **JavaScript** for animations, scroll effects, and ripple interactions — all styled in a Genshin-inspired fantasy aesthetic.
 
----
+🔗 **Live Preview:** [Visit the Website on Netlify](https://monlona-shop.netlify.app/)
+
 
 ## ✨ Features
 
